@@ -14,7 +14,7 @@ function App() {
   }, [])
 
   return (
-    <>
+    <div id='cards-container'>
       {data != null && 
         data.results.map((pokemon, index) => (
           <Card 
@@ -23,7 +23,7 @@ function App() {
           />
         ))
       }
-    </>
+    </div>
   )
 }
 
