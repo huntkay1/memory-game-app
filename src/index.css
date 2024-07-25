@@ -3,6 +3,13 @@ h1, h2, h3, h4, h5, p, img {
     padding: 0;
 }
 
+:root {
+    --text-color: #222222;
+}
+
+body {
+    color: var(--text-color);
+}
 
 #cards-container {
     display: grid;
@@ -26,7 +33,7 @@ h1, h2, h3, h4, h5, p, img {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #b19cd9;
+    background-color: #73c2fb;
     height: 100%;
     padding: 12px;
     box-sizing: border-box;
@@ -49,22 +56,23 @@ h1, h2, h3, h4, h5, p, img {
 
 .card-header span{
     font-size: 10px;
+    margin-right: -3px;
 }
 
 .card-hero {
     width: 80%;
     margin-bottom: 5px;
-    -webkit-animation: mover 1.2s infinite  alternate;
-    animation: mover 1.2s infinite  alternate;
+    -webkit-animation: mover .5s infinite  alternate;
+    animation: mover 1s infinite  alternate;
 }
 
 @-webkit-keyframes mover {
     0% { transform: translateY(0); }
-    100% { transform: translateY(-5px); }
+    100% { transform: translateY(-3px); }
 }
 @keyframes mover {
     0% { transform: translateY(0); }
-    100% { transform: translateY(-5px); }
+    100% { transform: translateY(-3px); }
 }
 
 .card-attacks {
