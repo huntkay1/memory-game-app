@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import './index.css';
 import Card from './Card';
+import Scoreboard from './Scoreboard';
 
 function App() {
   const [data, setData] = useState(null);
@@ -32,20 +33,23 @@ function App() {
     setShuffledDeck(deck);
   }
 
-  const displayedDeck = shuffledDeck ? shuffledDeck.slice(0, 10) : []; //only use first 10 
+  const displayedDeck = shuffledDeck ? shuffledDeck.slice(0, 8) : []; //only use first 10 
 
   return (
-    <div id='cards-container'>
-      {displayedDeck != null && 
-        displayedDeck.map((pokemon, index) => (
-          <Card 
-          pokemonName={pokemon.name}
-          key={index}
-          />
-        ))
-      }
+    <>
+      <Scoreboard />
+      <div id='cards-container'>
+        {displayedDeck != null && 
+          displayedDeck.map((pokemon, index) => (
+            <Card 
+            pokemonName={pokemon.name}
+            key={index}
+            />
+          ))
+        }
 
-    </div>
+      </div>
+    </>
   )
 }
 
