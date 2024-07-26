@@ -11,7 +11,7 @@ h1, h2, h3, h4, h5, p, img {
 
 body {
     color: var(--text-color);
-    background-image: url('./background.webp');
+    background-image: url('./assets/background.webp');
     background: cover;
     display: flex;
     justify-content: center;

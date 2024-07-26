@@ -14,9 +14,11 @@ function App() {
     
     if (loss) {
         console.log('you lose');
+        setScore(0);
     } else {
         setSelectedCards([...selectedCards, cardName]);
-        addPoint() ;
+        addPoint();
+        shuffleDeck(data);
     }
   }
 
