@@ -1,8 +1,9 @@
+export default function Scoreboard({ score }) {
 
-export default function Scoreboard() {
     return(
         <div id='scoreboard-container'>
-            <p id='score'>Current Score: 3</p>
+            <p id='score'>Current Score: {score}</p>
         </div>
     )
 }
+

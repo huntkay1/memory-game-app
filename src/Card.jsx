@@ -19,7 +19,7 @@ import fighting from './fighting.png';
 
 import { useState, useEffect } from 'react';
 
-export default function Card({ pokemonName }) {
+export default function Card({ pokemonName, makeMove }) {
 
     const [data, setData] = useState(null);
     let hp;
@@ -46,7 +46,7 @@ export default function Card({ pokemonName }) {
     return (
         <>
         {data != null && 
-            <div className='card'>
+            <div className='card' onClick={()=>makeMove(pokemonName)}>
                 <div className='card-contents'>
                     <div className='card-header'>
                         <h2>{pokemonName}</h2>

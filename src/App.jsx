@@ -6,6 +6,31 @@ import Scoreboard from './Scoreboard';
 function App() {
   const [data, setData] = useState(null);
   const [shuffledDeck, setShuffledDeck] = useState(null);
+  const [score, setScore] = useState(0);
+  const [selectedCards, setSelectedCards] = useState([]);
+
+  function makeMove(cardName) {
+    let loss = checkForLoss(cardName);
+    
+    if (loss) {
+        console.log('you lose');
+    } else {
+        setSelectedCards([...selectedCards, cardName]);
+        addPoint() ;
+    }
+  }
+
+  function checkForLoss(cardName) {
+    if(selectedCards.includes(cardName)) {
+        return true
+    } else {
+        return false
+    }
+  }
+
+  function addPoint() {
+    setScore(score + 1);
+  }
 
   useEffect(() => {
     fetch(`https://pokeapi.co/api/v2/pokemon?limit=100&offset=0`) 
@@ -37,12 +62,15 @@ function App() {
 
   return (
     <>
-      <Scoreboard />
+      <Scoreboard 
+      score={score}
+      />
       <div id='cards-container'>
         {displayedDeck != null && 
           displayedDeck.map((pokemon, index) => (
             <Card 
             pokemonName={pokemon.name}
+            makeMove={makeMove}
             key={index}
             />
           ))
