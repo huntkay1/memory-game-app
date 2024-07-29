@@ -16,7 +16,7 @@ import rock from './assets/rock.png';
 import steel from './assets/steel.png';
 import ice from './assets/ice.png';
 import fighting from './assets/fighting.png';
-
+import cardBack from './assets/card-back.png';
 import { useState, useEffect } from 'react';
 
 export default function Card({ pokemonName, makeMove }) {
@@ -47,23 +47,28 @@ export default function Card({ pokemonName, makeMove }) {
         <>
         {data != null && 
             <div className='card' onClick={()=>makeMove(pokemonName)}>
-                <div className='card-contents'>
-                    <div className='card-header'>
-                        <h2>{pokemonName}</h2>
-                        <h2><span>HP</span> {hp}</h2>
+                <div className='card-inner'>
+                    <div className='card-front'>
+                        <div className='card-header'>
+                            <h2>{pokemonName}</h2>
+                            <h2><span>HP</span> {hp}</h2>
+                        </div>
+
+                        <img src={imgURL} alt={pokemonName} className='card-hero'></img>
+
+                        <div className='card-attacks'>
+                            {moves.map((item, index) => {
+                                return (
+                                    <div key={index} className='attack-container'>
+                                        <img src={type}></img>
+                                        <p>{item.move.name}</p>
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </div>
-
-                    <img src={imgURL} alt={pokemonName} className='card-hero'></img>
-
-                    <div className='card-attacks'>
-                        {moves.map((item, index) => {
-                            return (
-                                <div key={index} className='attack-container'>
-                                    <img src={type}></img>
-                                    <p>{item.move.name}</p>
-                                </div>
-                            )
-                        })}
+                    <div className='card-back'>
+                        <img src={cardBack} alt='pokemon card' height='300px' width='200px'></img>
                     </div>
                 </div>
             </div>
