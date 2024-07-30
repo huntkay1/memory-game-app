@@ -50,8 +50,8 @@ body {
     z-index: 99;
 } */
 
-.card:hover .card-inner {
-    transform: rotateY( 180deg ) ;
+.card-inner.flipped {
+    transform: rotateY( 180deg );
     transition: transform 0.5s;
 }
 

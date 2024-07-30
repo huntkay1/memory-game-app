@@ -19,35 +19,48 @@ import fighting from './assets/fighting.png';
 import cardBack from './assets/card-back.png';
 import { useState, useEffect } from 'react';
 
-export default function Card({ pokemonName, makeMove }) {
+export default function Card({ pokemonName, makeMove, flipCards, setFlipCards }) {
 
     const [data, setData] = useState(null);
-    let hp;
-    let imgURL;
-    let moves;
-    let type;
+    const [hp, setHP] = useState(null);
+    const [imgURL, setImgURL] = useState(null);
+    const [moves, setMoves] = useState([]);
+    const [type, setType] = useState(null)
 
     useEffect(() => {
-        fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`) 
-          .then(response => response.json())
-          .then(data => setData(data))
-          .catch(error => console.error(error))
-        
+        const fetchData = async() => {
+            try {
+                const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+                const data = await response.json();
+                setData(data);
+                populateCards(data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchData();
     }, [pokemonName])
 
-    if (data != null) {
-        hp = data.stats[0].base_stat;
-        imgURL = data.sprites.other['official-artwork'].front_default;
-        moves = data.moves.slice(0,3); //only want to use 3 moves
-        type = eval(data.types[0].type.name); //turn string into variable so that it can be used as icon img src
+
+
+    function populateCards(data) { 
+        setHP(data.stats[0].base_stat);
+        setImgURL(data.sprites.other['official-artwork'].front_default);
+        setMoves(data.moves.slice(0,3)); //only want to use 3 moves
+        setType(eval(data.types[0].type.name)); //turn string into variable so that it can be used as icon img src
+    }
+
+    function handleSelectedCard(pokemonName) {
+        setFlipCards('card-inner flipped'); //flip cards to back
+        setTimeout(()=>makeMove(pokemonName), 600); 
     }
 
 
     return (
         <>
         {data != null && 
-            <div className='card' onClick={()=>makeMove(pokemonName)}>
-                <div className='card-inner'>
+            <div className='card'  onClick={()=>handleSelectedCard(pokemonName)}>
+                <div className={flipCards}>
                     <div className='card-front'>
                         <div className='card-header'>
                             <h2>{pokemonName}</h2>
@@ -74,6 +87,5 @@ export default function Card({ pokemonName, makeMove }) {
             </div>
         }
         </>
-       
     )
 }
