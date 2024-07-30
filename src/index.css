@@ -19,15 +19,30 @@ body {
 
 #scoreboard-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     margin-top: 40px;
     margin-bottom: 40px;
+    height: 100px;
 }
 
 #score {
     font-family: 'VT323', monospace, sans-serif;
     font-size: 50px;
+    margin-bottom: 10px;
 }
+
+#lose-message {
+    font-family: 'VT323', monospace, sans-serif;
+    font-size: 40px;
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
 
 #cards-container {
     display: grid;
@@ -45,10 +60,10 @@ body {
     perspective: 500px;
 }
 
-/* .card:hover {
+.card-inner:hover {
     box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
     z-index: 99;
-} */
+}
 
 .card-inner.flipped {
     transform: rotateY( 180deg );
