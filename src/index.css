@@ -32,7 +32,7 @@ body {
     margin-bottom: 10px;
 }
 
-#lose-message {
+.message {
     font-family: 'VT323', monospace, sans-serif;
     font-size: 40px;
     animation: blinker 1s linear infinite;

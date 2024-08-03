@@ -10,13 +10,15 @@ function App() {
   const [selectedCards, setSelectedCards] = useState([]);
   const [flipCards, setFlipCards] = useState('card-inner flipped');
   const [showLoseMessage, setShowLoseMessage] = useState(false);
+  const [showWinMessage, setShowWinMessage] = useState(false)
 
   window.addEventListener('load', () => setTimeout(() => setFlipCards('card-inner'), 300)); //flip cards over on first load
 
   function makeMove(cardName) {
     let loss = checkForLoss(cardName);
-    if (loss) {
-      setShowLoseMessage(true);
+    let win = checkForWin();
+    if (loss || win) {
+      loss ? setShowLoseMessage(true) : setShowWinMessage(true)
       setScore(0);
       setSelectedCards([]);
     } else {
@@ -33,6 +35,10 @@ function App() {
     } else {
         return false
     }
+  }
+
+  function checkForWin() {
+    return score === 2;
   }
 
   function addPoint() {
@@ -76,6 +82,7 @@ function App() {
       <Scoreboard 
       score={score}
       showLoseMessage={showLoseMessage}
+      showWinMessage={showWinMessage}
       />
       <div id='cards-container'>
         {displayedDeck != null && 
