@@ -5,14 +5,14 @@ import Scoreboard from './Scoreboard';
 
 function App() {
   const [data, setData] = useState(null);
-  const [shuffledDeck, setShuffledDeck] = useState(null);
   const [score, setScore] = useState(0);
   const [selectedCards, setSelectedCards] = useState([]);
   const [flipCards, setFlipCards] = useState('card-inner flipped');
   const [showLoseMessage, setShowLoseMessage] = useState(false);
-  const [showWinMessage, setShowWinMessage] = useState(false)
+  const [showWinMessage, setShowWinMessage] = useState(false);
+  const [deck, setDeck] = useState(null);
 
-  window.addEventListener('load', () => setTimeout(() => setFlipCards('card-inner'), 300)); //flip cards over on first load
+  window.addEventListener('load', getData())
 
   function makeMove(cardName) {
     let loss = checkForLoss(cardName);
@@ -25,7 +25,7 @@ function App() {
       setTimeout(() => setFlipCards('card-inner'), 50); //flip cards to front
       setSelectedCards([...selectedCards, cardName]);
       addPoint();
-      shuffleDeck(data);
+      shuffleDeck(deck);
     }
   }
 
@@ -38,44 +38,55 @@ function App() {
   }
 
   function checkForWin() {
-    return score === 2;
+    return score === 8;
   }
 
   function addPoint() {
     setScore(score + 1);
   }
 
-  useEffect(() => {
+  //create the deck, shuffle it, and flip over cards afterwards
+  function createDeck() {
+    //while starting a new game, removes messages
+    setShowWinMessage(false);
+    setShowLoseMessage(false);
+
+    let newDeck = data.results;
+    shuffleDeck(newDeck);
+    setTimeout(() => setFlipCards('card-inner'), 400);
+  }
+
+  function getData() { 
+    useEffect(() => {
       const fetchData = async() => {
         try {
-            const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=50&offset=0`);
+            const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=1000&offset=0`);
             const data = await response.json();
             setData(data);
         } catch (error) {
             console.log(error);
         }
-    }
-    fetchData();
-  }, [])
+      } 
+      fetchData();
+    }, [])
+  }
 
+  //after the data is available, create the deck
   useEffect(() => {
     if(data != null) {
-      shuffleDeck(data);
+      createDeck();
     }
   }, [data]);
 
-  function shuffleDeck(data) {
-    const deck = data.results;
+  function shuffleDeck(deck) {
     for (let i = deck.length -1; i > 0; i--) {
       let j = Math.floor(Math.random() * i)
       let k = deck[i]
       deck[i] = deck[j]
       deck[j] = k
     }
-    setShuffledDeck(deck);
+    setDeck(deck.slice(0,8)); //only pull 8 cards from the deck 
   }
-
-  const displayedDeck = shuffledDeck ? shuffledDeck.slice(0, 8) : []; //only use first 10 
 
   return (
     <>
@@ -83,10 +94,11 @@ function App() {
       score={score}
       showLoseMessage={showLoseMessage}
       showWinMessage={showWinMessage}
+      createDeck={createDeck}
       />
       <div id='cards-container'>
-        {displayedDeck != null && 
-          displayedDeck.map((pokemon, index) => (
+        {deck != null && 
+          deck.map((pokemon, index) => (
             <Card 
             pokemonName={pokemon.name}
             makeMove={makeMove}
