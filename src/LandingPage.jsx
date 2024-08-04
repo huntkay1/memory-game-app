@@ -9,7 +9,7 @@ export default function LandingPage({ setPlayGame, setFlipCards }) {
     return(
         <div id='landing-page'>
             <div id='landing-page-title'>
-                <img src={logo} width='400px'></img>
+                <img src={logo} width='400px' alt='pokemon logo'></img>
                 <h2 className='subtitle'>Memory Game</h2>
             </div>
 
