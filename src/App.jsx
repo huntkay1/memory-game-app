@@ -55,7 +55,7 @@ function App() {
   function createDeck() {
     let newDeck = data.results;
     shuffleDeck(newDeck);
-    setFlipCards('card-inner')
+    setFlipCards('card-inner');
   }
 
   function getData() { 
