@@ -1,14 +1,28 @@
-export default function Scoreboard({ score, showLoseMessage, showWinMessage, createDeck }) {
+export default function Scoreboard({ score, showLoseMessage, showWinMessage, createDeck, setPlayGame, resetGame }) {
+    function startGame() {
+        createDeck(); 
+        resetGame();
+    }
 
+    function endGame() {
+        setPlayGame(false); 
+        resetGame();
+    }
     return(
         <div id='scoreboard-container'>
             <p id='score'>Current Score: {score}</p>
+
             {showLoseMessage && 
             <p className='message'>You Lose! Play Again?</p>}
             {showWinMessage && 
             <p className='message'>You Win! Play Again?</p>}
+
             {(showLoseMessage || showWinMessage) &&
-                <button id='play-again'onClick={createDeck}>Yes</button>
+                <div id='button-container'>
+                    <button id='play-again' onClick={startGame}>Yes</button>
+                    <button onClick={endGame}>No</button>
+                </div>
+
             }
 
         </div>

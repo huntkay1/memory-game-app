@@ -44,14 +44,17 @@ function App() {
     setScore(score + 1);
   }
 
-  //create the deck, shuffle it, and flip over cards afterwards
-  function createDeck() {
-    //while starting a new game, removes messages
+  function resetGame() {
     setShowWinMessage(false);
     setShowLoseMessage(false);
+    setScore(0);
+  }
 
+  //create the deck, shuffle it, and flip over cards
+  function createDeck() {
     let newDeck = data.results;
     shuffleDeck(newDeck);
+    setFlipCards('card-inner')
   }
 
   function getData() { 
@@ -102,6 +105,8 @@ function App() {
             showLoseMessage={showLoseMessage}
             showWinMessage={showWinMessage}
             createDeck={createDeck}
+            setPlayGame={setPlayGame}
+            resetGame={resetGame}
           />
   
           <div id='cards-container'>
