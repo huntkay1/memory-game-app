@@ -48,6 +48,7 @@ function App() {
     setShowWinMessage(false);
     setShowLoseMessage(false);
     setScore(0);
+    setFlipCards('card-inner flipped')
   }
 
   //create the deck, shuffle it, and flip over cards
