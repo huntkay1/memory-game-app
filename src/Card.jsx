@@ -73,7 +73,7 @@ export default function Card({ pokemonName, makeMove, flipCards, setFlipCards })
                             {moves.map((item, index) => {
                                 return (
                                     <div key={index} className='attack-container'>
-                                        <img src={type}></img>
+                                        <img src={type} alt='attack-type'></img>
                                         <p>{item.move.name}</p>
                                     </div>
                                 )
