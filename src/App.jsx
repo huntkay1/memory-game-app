@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './index.css';
 import Card from './Card';
 import Scoreboard from './Scoreboard';
+import LandingPage from './LandingPage';
 
 function App() {
   const [data, setData] = useState(null);
@@ -11,6 +12,8 @@ function App() {
   const [showLoseMessage, setShowLoseMessage] = useState(false);
   const [showWinMessage, setShowWinMessage] = useState(false);
   const [deck, setDeck] = useState(null);
+  const [playGame, setPlayGame] = useState(false);
+
 
   window.addEventListener('load', getData())
 
@@ -30,15 +33,11 @@ function App() {
   }
 
   function checkForLoss(cardName) {
-    if(selectedCards.includes(cardName)) {
-        return true
-    } else {
-        return false
-    }
+    return selectedCards.includes(cardName)
   }
 
   function checkForWin() {
-    return score === 8;
+    return score === 7;
   }
 
   function addPoint() {
@@ -53,7 +52,6 @@ function App() {
 
     let newDeck = data.results;
     shuffleDeck(newDeck);
-    setTimeout(() => setFlipCards('card-inner'), 400);
   }
 
   function getData() { 
@@ -90,25 +88,40 @@ function App() {
 
   return (
     <>
-      <Scoreboard 
-      score={score}
-      showLoseMessage={showLoseMessage}
-      showWinMessage={showWinMessage}
-      createDeck={createDeck}
-      />
-      <div id='cards-container'>
-        {deck != null && 
-          deck.map((pokemon, index) => (
-            <Card 
-            pokemonName={pokemon.name}
-            makeMove={makeMove}
-            flipCards={flipCards}
-            setFlipCards={setFlipCards}
-            key={index}
-            />
-          ))
-        }
-      </div>
+      {!playGame &&       
+        <LandingPage 
+          setPlayGame={setPlayGame}
+          setFlipCards={setFlipCards}
+        />
+      }
+
+      {playGame && 
+        <>
+          <Scoreboard 
+            score={score}
+            showLoseMessage={showLoseMessage}
+            showWinMessage={showWinMessage}
+            createDeck={createDeck}
+          />
+  
+          <div id='cards-container'>
+            {deck != null && 
+              deck.map((pokemon, index) => (
+                <Card 
+                pokemonName={pokemon.name}
+                makeMove={makeMove}
+                flipCards={flipCards}
+                setFlipCards={setFlipCards}
+                key={index}
+                />
+              ))
+            }
+          </div>
+        </>
+      }
+
+
+
     </>
   )
 }
