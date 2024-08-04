@@ -71,18 +71,24 @@ body {
     font-family: 'VT323', monospace, sans-serif;
     font-size: 40px;
     animation: blinker 1s linear infinite;
+    margin-bottom: 15px;
 }
 
-#play-again, #start-button { 
+.play-again, #start-button { 
     color: var(--text-color);
     font-size: 40px;
     background-color: transparent;
     font-family: 'VT323', monospace, sans-serif;
-    margin-top: 10px;
     border: none;
 }
 
-#play-again {
+#button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 150px;
+}
+
+.play-again:hover {
     border-bottom: 3px solid var(--text-color);
 }
 

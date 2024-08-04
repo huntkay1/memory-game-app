@@ -19,8 +19,8 @@ export default function Scoreboard({ score, showLoseMessage, showWinMessage, cre
 
             {(showLoseMessage || showWinMessage) &&
                 <div id='button-container'>
-                    <button id='play-again' onClick={startGame}>Yes</button>
-                    <button onClick={endGame}>No</button>
+                    <button className='play-again' onClick={startGame}>Yes</button>
+                    <button className='play-again' onClick={endGame}>No</button>
                 </div>
 
             }

@@ -14,7 +14,7 @@ export default function LandingPage({ setPlayGame, setFlipCards }) {
             </div>
 
             <div id='instructions'>
-                <p>Select a card and don't repeat!</p>
+                <p>Select each card and don't repeat!</p>
                 <p>The cards will be reshuffled after each turn.</p>
                 <p>Find all of the card to win!</p>
             </div>
