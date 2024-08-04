@@ -3,9 +3,11 @@ import logo from './assets/logo.png';
 export default function LandingPage({ setPlayGame, setFlipCards }) {
 
     function initializeGame() {
+        setFlipCards('card-inner flipped')
+        setTimeout(() => setFlipCards('card-inner'), 1000); //flip cards at start of game
         setPlayGame(true);
-        setTimeout(() => setFlipCards('card-inner'), 500); //flip cards at start of game
     }
+
     return(
         <div id='landing-page'>
             <div id='landing-page-title'>
