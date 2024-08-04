@@ -60,10 +60,17 @@ body {
     height: 150px;
 }
 
+#scoreboard-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 800px;
+    margin-bottom: 15px;
+}
+
 #score {
     font-family: 'VT323', monospace, sans-serif;
     font-size: 30px;
-    margin-bottom: 30px;
     align-self: flex-start;
 }
 
@@ -74,12 +81,20 @@ body {
     margin-bottom: 15px;
 }
 
-.play-again, #start-button { 
+.play-again, #start-button, #quit-button { 
     color: var(--text-color);
     font-size: 40px;
     background-color: transparent;
     font-family: 'VT323', monospace, sans-serif;
     border: none;
+}
+
+#quit-button {
+    font-size: 30px;
+}
+
+#quit-button:hover {
+    border-bottom: 3px solid var(--text-color);
 }
 
 #button-container {

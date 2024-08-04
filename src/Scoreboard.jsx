@@ -10,7 +10,10 @@ export default function Scoreboard({ score, showLoseMessage, showWinMessage, cre
     }
     return(
         <div id='scoreboard-container'>
-            <p id='score'>Current Score: {score}</p>
+            <div id='scoreboard-top'>
+                <p id='score'>Current Score: {score}</p>
+                <button id='quit-button' onClick={endGame}>QUIT</button>
+            </div>
 
             {showLoseMessage && 
             <p className='message'>You Lose! Play Again?</p>}
