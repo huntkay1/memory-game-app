@@ -1,12 +1,12 @@
 export default function Scoreboard({ score, showLoseMessage, showWinMessage, createDeck, setPlayGame, resetGame }) {
     function startGame() {
         createDeck(); 
-        resetGame();
+        resetGame('new');
     }
 
     function endGame() {
         setPlayGame(false); 
-        resetGame();
+        resetGame('end');
     }
     return(
         <div id='scoreboard-container'>

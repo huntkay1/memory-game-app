@@ -44,11 +44,15 @@ function App() {
     setScore(score + 1);
   }
 
-  function resetGame() {
+  function resetGame(gameType) {
     setShowWinMessage(false);
     setShowLoseMessage(false);
     setScore(0);
-    setFlipCards('card-inner flipped')
+    if (gameType === 'new') {
+      setFlipCards('card-inner')
+    }else if (gameType === 'end') {
+      setFlipCards('card-inner flipped')
+    }
   }
 
   //create the deck, shuffle it, and flip over cards
