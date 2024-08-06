@@ -20,10 +20,11 @@ function App() {
   function makeMove(cardName) {
     let loss = checkForLoss(cardName);
     let win = checkForWin();
-    if (loss || win) {
-      loss ? setShowLoseMessage(true) : setShowWinMessage(true)
-      setScore(0);
-      setSelectedCards([]);
+    if (loss) {
+      setShowLoseMessage(true);
+    } else if (win) {
+      setShowWinMessage(true);
+      addPoint();
     } else {
       setTimeout(() => setFlipCards('card-inner'), 50); //flip cards to front
       setSelectedCards([...selectedCards, cardName]);
@@ -48,6 +49,7 @@ function App() {
     setShowWinMessage(false);
     setShowLoseMessage(false);
     setScore(0);
+    setSelectedCards([]);
     if (gameType === 'new') {
       setFlipCards('card-inner')
     }else if (gameType === 'end') {
