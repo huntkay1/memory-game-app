@@ -46,13 +46,13 @@ export default function Card({ pokemonName, makeMove, flipCards, setFlipCards })
     function populateCards(data) { 
         setHP(data.stats[0].base_stat);
         setImgURL(data.sprites.other['official-artwork'].front_default);
-        setMoves(data.moves.slice(0,3)); //only want to use 3 moves
+        setMoves(data.moves.slice(0,3)); //only use 3 moves
         setType(eval(data.types[0].type.name)); //turn string into variable so that it can be used as icon img src
     }
 
     function handleSelectedCard(pokemonName) {
         setFlipCards('card-inner flipped'); //flip cards to back
-        setTimeout(()=>makeMove(pokemonName), 600); 
+        setTimeout(()=>makeMove(pokemonName), 600); //delay allows time for cards to flip
     }
 
 

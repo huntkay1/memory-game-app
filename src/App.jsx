@@ -13,6 +13,7 @@ function App() {
   const [showWinMessage, setShowWinMessage] = useState(false);
   const [deck, setDeck] = useState(null);
   const [playGame, setPlayGame] = useState(false);
+  const [loading, setLoading] = useState(true);
 
 
   window.addEventListener('load', getData())
@@ -59,9 +60,11 @@ function App() {
 
   //create the deck, shuffle it, and flip over cards
   function createDeck() {
-    let newDeck = data.results;
-    shuffleDeck(newDeck);
-    setFlipCards('card-inner');
+    if (data && !loading) {
+      let newDeck = data.results;
+      shuffleDeck(newDeck);
+      setFlipCards('card-inner'); 
+    }
   }
 
   function getData() { 
@@ -71,8 +74,10 @@ function App() {
             const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=1000&offset=0`);
             const data = await response.json();
             setData(data);
+            setLoading(false);
         } catch (error) {
             console.log(error);
+            setLoading(false);
         }
       } 
       fetchData();
@@ -81,7 +86,7 @@ function App() {
 
   //after the data is available, create the deck
   useEffect(() => {
-    if(data != null) {
+    if(data) {
       createDeck();
     }
   }, [data]);
