@@ -51,7 +51,8 @@ function App() {
     setShowLoseMessage(false);
     setScore(0);
     setSelectedCards([]);
-    if (gameType === 'new') {
+    setLoading(true);
+    if (gameType === 'new' && !loading) {
       setFlipCards('card-inner')
     }else if (gameType === 'end') {
       setFlipCards('card-inner flipped')
@@ -60,7 +61,7 @@ function App() {
 
   //create the deck, shuffle it, and flip over cards
   function createDeck() {
-    if (data && !loading) {
+    if (data) {
       let newDeck = data.results;
       shuffleDeck(newDeck);
       setFlipCards('card-inner'); 
@@ -74,10 +75,8 @@ function App() {
             const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=1000&offset=0`);
             const data = await response.json();
             setData(data);
-            setLoading(false);
         } catch (error) {
             console.log(error);
-            setLoading(false);
         }
       } 
       fetchData();
@@ -122,13 +121,14 @@ function App() {
           />
   
           <div id='cards-container'>
-            {deck != null && 
+            {deck && 
               deck.map((pokemon, index) => (
                 <Card 
                 pokemonName={pokemon.name}
                 makeMove={makeMove}
                 flipCards={flipCards}
                 setFlipCards={setFlipCards}
+                setLoading={setLoading}
                 key={index}
                 />
               ))

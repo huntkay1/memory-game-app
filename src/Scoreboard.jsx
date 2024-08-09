@@ -2,7 +2,6 @@ export default function Scoreboard({ score, showLoseMessage, showWinMessage, cre
     function startGame() {
         createDeck(); 
         resetGame('new');
-        setPlayGame(true);
     }
 
     function endGame() {

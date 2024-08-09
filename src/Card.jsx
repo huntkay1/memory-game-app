@@ -19,7 +19,7 @@ import fighting from './assets/fighting.png';
 import cardBack from './assets/card-back.png';
 import { useState, useEffect } from 'react';
 
-export default function Card({ pokemonName, makeMove, flipCards, setFlipCards }) {
+export default function Card({ pokemonName, makeMove, flipCards, setFlipCards, setLoading }) {
 
     const [data, setData] = useState(null);
     const [hp, setHP] = useState(null);
@@ -71,6 +71,7 @@ export default function Card({ pokemonName, makeMove, flipCards, setFlipCards })
 
                         <div className='card-attacks'>
                             {moves.map((item, index) => {
+                                if(index === 7) {setLoading(false)}
                                 return (
                                     <div key={index} className='attack-container'>
                                         <img src={normal} alt='attack icon'></img>
