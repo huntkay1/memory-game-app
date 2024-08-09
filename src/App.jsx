@@ -91,12 +91,14 @@ function App() {
   }, [data]);
 
   function shuffleDeck(deck) {
+    setLoading(true);
     for (let i = deck.length -1; i > 0; i--) {
       let j = Math.floor(Math.random() * i)
       let k = deck[i]
       deck[i] = deck[j]
       deck[j] = k
     }
+    setLoading(false);
     setDeck(deck.slice(0,8)); //only pull 8 cards from the deck 
   }
 
