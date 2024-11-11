@@ -1,4 +1,5 @@
 import logo from './assets/logo.png';
+import { motion } from 'framer-motion'
 
 export default function LandingPage({ setPlayGame, setFlipCards }) {
 
@@ -11,18 +12,47 @@ export default function LandingPage({ setPlayGame, setFlipCards }) {
     return(
         <div id='landing-page'>
             <div id='landing-page-title'>
-                <img src={logo} width='400px' alt='pokemon logo'></img>
-                <h2 className='subtitle'>Memory Game</h2>
+                <motion.img 
+                    src={logo} 
+                    width='400px' 
+                    alt='pokemon logo'
+                    initial={{ opacity: 0, y:-50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5}}
+                >
+                </motion.img>
+
+                <motion.h2 
+                    className='subtitle'
+                    initial={{ opacity: 0, y:-50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8, duration: 0.5}}
+                >
+                    Memory Game
+                </motion.h2>
             </div>
 
-            <div id='instructions'>
+            <motion.div 
+                id='instructions'
+                initial={{ opacity: 0, y:-50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.5, duration: 0.5}}
+            >
                 <p>Select each card and don't repeat!</p>
                 <p>The cards will be reshuffled after each turn.</p>
                 <p>Find all of the card to win!</p>
-            </div>
+            </motion.div>
 
             <div>
-                <button id='start-button' onClick={initializeGame}>START</button>
+                <motion.button 
+                    id='start-button' 
+                    onClick={initializeGame}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 2.5, duration: 0.5}}
+                >
+                    START
+                </motion.button>
             </div>
         </div>
     )
