@@ -32,6 +32,8 @@ h1, h2, h3, h4, h5, p, img {
     font-size: 28px;
     text-align: center;
     margin-bottom: 60px;
+    display: grid;
+    gap: 10px;
 }
 
 #start-button {

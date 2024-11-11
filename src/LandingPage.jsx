@@ -38,9 +38,8 @@ export default function LandingPage({ setPlayGame, setFlipCards }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.5, duration: 0.5}}
             >
-                <p>Select each card and don't repeat!</p>
-                <p>The cards will be reshuffled after each turn.</p>
-                <p>Find all of the card to win!</p>
+                <p>Select each card but don't click the same card twice.</p>
+                <p>Find all of the cards to win!</p>
             </motion.div>
 
             <div>
